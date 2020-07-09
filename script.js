@@ -24,7 +24,6 @@ var linkBtn = document.getElementById("linkBtn");
 var controlsEL = document.getElementById("controls");
 var inputsEl = document.getElementById("inputs");
 var scoresEl = document.getElementById("scores");
-// var formEL;
 var clearEl = document.getElementById("clear");
 
 /* Event listeners */
@@ -54,17 +53,16 @@ clearEl.addEventListener('click', () => {
 /* Helper functions*/
 //To display a single question in form
 function displayQuestion() {
-    for (var i = 0; i < questions.length; i++) { 
+    for (var i = 0; i < questions.length; i++) {
         var formEl = document.createElement('form');
-        inputsEl.removeChild(inputsEl.lastChild);
         inputsEl.appendChild(formEl);
 
         var q = questions[i];
         var title = document.createTextNode(q.title);
         formEl.appendChild(title);
         var choices = q.choices;
-        console.log(choices);
-        // var selected = "";
+        var answer = q.answer;
+        
         for (var j = 0; j < choices.length; j ++) {
             /* create radio inputs as the following:
             <div class="form-check">
@@ -92,13 +90,25 @@ function displayQuestion() {
             optionDiv.appendChild(optionInput);
             optionDiv.appendChild(optionLabel);
             
-            formEl.appendChild(optionDiv);
-
-            optionInput.addEventListener('click', () => {
-                console.log(optionDiv);
-                formEl.removeChild(optionDiv);
-            });
+            formEl.appendChild(optionDiv);          
         }
+
+        var radios = document.getElementsByName('radios');
+        for(radio in radios) {
+            radios[radio].onclick = function() {
+                var userAns = this.value;
+                console.log(title + "\n answer:" + answer);
+                console.log("correct answer:" + q.answer);
+                if (answer == userAns) {
+                    alert("correct");
+                } else {
+                    alert("wrong");
+                    secondsLeft -= 15;
+                }
+                
+            }
+        }
+        
             
     }
     
@@ -120,6 +130,8 @@ function setTime() {
 
 //TODO...need one form submit to go to this page
 function endQuiz() {
+    //remove all the quesiton forms
+    inputsEl.innerHTML = "";
     //add a text node to dispay user score
     var textEL = document.createTextNode("Your final score is " + secondsLeft);
     inputsEl.appendChild(textEL);
