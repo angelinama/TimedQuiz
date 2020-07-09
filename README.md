@@ -5,7 +5,6 @@ As a coding bootcamp student I want to take a timed quiz on JavaScript fundament
  https://angelinama.github.io/timed-quiz/
 
 ### Video Demo link
-https://drive.google.com/file/d/1XWftLda2NzbO5HSHIsjTqD0lc-74T30F/view
 [![Watch the video]](https://drive.google.com/file/d/1XWftLda2NzbO5HSHIsjTqD0lc-74T30F/view)
 
 ### TODO
