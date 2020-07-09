@@ -15,6 +15,7 @@ var questions = [
 // import {} from './questions';
 // console.log(questions);
 
+var score = 0; //start score is 0
 var secondsLeft = 15 * questions.length; //15 second per question
 var timeEl = document.getElementById("timer");
 var mainEl = document.getElementById("main");
@@ -24,36 +25,45 @@ var linkBtn = document.getElementById("linkBtn");
 var controlsEL = document.getElementById("controls");
 var inputsEl = document.getElementById("inputs");
 var scoresEl = document.getElementById("scores");
-var radios;
+var formEL = document.getElementById("single");
 
-function main() {
-    //start the quiz: start timer and hide the start button
-    startBtn.addEventListener('click', () => {
-        controlsEL.style.display = "None";
+//start the quiz: start timer and hide the start button
+startBtn.addEventListener('click', () => {
+    controlsEL.style.display = "None";
+    displayQuestion();      
+    setTime();
+});  
 
-        inputsEl.style.display = "block"; //TODO...change to add a new div
-        radios = document.getElementsByName("exampleRadios");
-        console.log(radios);
-        for (var i = 0; i < radios.length; i++) {
-            console.log(radios[i].checked);
+//click go back will reload the quiz, not ideal, better action should be go back to last question
+resetBtn.addEventListener('click', () => {
+    window.location.reload(true);
+ });
+    
+ linkBtn.addEventListener('click', () => {
+    doneMessage();
+});
+    
+
+
+
+function displayQuestion() {
+    for (var i = 0; i < questions.length; i++) {
+        var q = questions[i];
+        var title = document.createElement('p');
+        title.textContent = q.title;
+        console.log(formEL.lastChild);
+        formEL.removeChild(formEL.lastChild); //TODO... delete after select option
+        formEL.appendChild(title);
+    }
+    // radios = document.getElementsByName("exampleRadios");
+    //     console.log(radios);
+    //     for (var i = 0; i < radios.length; i++) {
+    //         console.log(radios[i].checked);
         //     if (radios[i].value === "option1") {
         //     console.log(radios[i].value);
         //     break;
         // }
-    }
-        setTime();
-    });  
-    
-    resetBtn.addEventListener('click', () => {
-        window.location.reload(true);
-    });
-    
-    linkBtn.addEventListener('click', () => {
-        startBtn.style.display = "None";
-        scoresEl.style.display = "block";
-    });
-    
-
+    // }
 }
 
 function setTime() {
@@ -70,13 +80,7 @@ function setTime() {
 }
 
 function doneMessage() {
-//   timeEl.textContent = " ";
-
-  var doneEl = document.createElement("div");
-//   doneEl.setAttribute("class", "form-check");
-doneEl.textContent = "hellow world";
-  inputsEl.appendChild(doneEl);
-
+    controlsEL.style.display = "None";
+    inputsEl.style.display = "None";
+    scoresEl.style.display = "block";
 }
-
-main();
