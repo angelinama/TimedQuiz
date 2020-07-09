@@ -16,15 +16,6 @@ var questions = [
 
 var initial = 'defaultUser';
 var secondsLeft = 15 * questions.length; //15 second per question
-// var count = 0;
-// if (localStorage.getItem("count") === null) {
-//     localStorage.setItem("count", "" + count);
-    
-//   } else {
-//     count = parseInt(localStorage.getItem("count"), 10) + 1;
-//     alert(count);
-//     localStorage.setItem("count", "" + count);
-//   }
 var timeEl = document.getElementById("timer");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
@@ -83,7 +74,9 @@ function displayQuestion() {
             </div>
             */
             var optionDiv = document.createElement('div');
-            optionDiv.className = 'form-check';
+            optionDiv.setAttribute('class','form-check my-1');
+            optionDiv.style.backgroundColor = "#563d7c";
+            optionDiv.style.color = 'white';
 
             var optionInput = document.createElement('input');
             optionInput.className = "form-check-input";
@@ -112,7 +105,7 @@ function displayQuestion() {
                 if (answer == userAns) {
                     alert("correct");
                 } else {
-                    alert("wrong");
+                    
                     secondsLeft -= 15;
                     //TODO...corner case when user deduct too much points before last question
                 }
