@@ -1,0 +1,14 @@
+.my-btn {
+    background-color: #563d7c;
+    border-color: #563d7c;
+    color: white;   
+}
+
+.my-btn:hover {
+    color: white;
+}
+
+#inputs, #scores {
+    display: none;
+}
+

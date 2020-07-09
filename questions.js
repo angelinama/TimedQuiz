@@ -12,3 +12,4 @@ var questions = [
     // etc.
   ];
   
+//   export default { questions };
