@@ -16,6 +16,15 @@ var questions = [
 
 var initial = 'defaultUser';
 var secondsLeft = 15 * questions.length; //15 second per question
+// var count = 0;
+// if (localStorage.getItem("count") === null) {
+//     localStorage.setItem("count", "" + count);
+    
+//   } else {
+//     count = parseInt(localStorage.getItem("count"), 10) + 1;
+//     alert(count);
+//     localStorage.setItem("count", "" + count);
+//   }
 var timeEl = document.getElementById("timer");
 var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
@@ -32,7 +41,6 @@ startBtn.addEventListener('click', () => {
     controlsEL.style.display = "None";
     displayQuestion();      
     setTime();
-    localStorage.setItem("userList", "sth");
 });  
 
 //click go back will reload the quiz, not ideal, better action should be go back to last question
@@ -48,6 +56,8 @@ linkBtn.addEventListener('click', () => {
 //clear button listener to clear user score history
 clearEl.addEventListener('click', () => {
     window.localStorage.clear();
+    //redisplay the page
+    displayScores();
 });
     
 /* Helper functions*/
@@ -104,14 +114,12 @@ function displayQuestion() {
                 } else {
                     alert("wrong");
                     secondsLeft -= 15;
+                    //TODO...corner case when user deduct too much points before last question
                 }
                 
             }
-        }
-        
-            
-    }
-    
+        }    
+    }    
 }
 
 // Main timer count down function
@@ -132,6 +140,12 @@ function setTime() {
 function endQuiz() {
     //remove all the quesiton forms
     inputsEl.innerHTML = "";
+
+    //add title "all done"
+    var headEL = document.createElement('h1');
+    headEL.className = 'h1';
+    headEL.textContent = "All Done";
+    inputsEl.appendChild(headEL);
     //add a text node to dispay user score
     var textEL = document.createTextNode("Your final score is " + secondsLeft);
     inputsEl.appendChild(textEL);
@@ -173,7 +187,12 @@ function endQuiz() {
         var curUser = {
             initial:initial, score: secondsLeft
         };
-        alert(curUser.initial + "'s score is: " + curUser.score);
+        var curList = [];
+        if (localStorage.getItem("record") !== null) {
+            curList = JSON.parse(localStorage.getItem("record"));
+        }
+        curList.push(curUser);       
+        localStorage.setItem("record",JSON.stringify(curList));
         displayScores();
     });
 }
@@ -184,6 +203,17 @@ function displayScores() {
     controlsEL.style.display = "None";
     inputsEl.style.display = "None";
     scoresEl.style.display = "block";
-    
-    
+    var userList = document.getElementById("scoreList");
+    userList.innerHTML = "";
+    var curList = [];
+        if (localStorage.getItem("record") !== null) {
+            curList = JSON.parse(localStorage.getItem("record"));
+        }
+    for (var i = 0; i < curList.length; i++) {
+        var oneUser = curList[i];
+        console.log("single user" + oneUser);
+        var str = oneUser.initial + ": " + oneUser.score + "\n";
+        var newLine = document.createTextNode(str);
+        userList.appendChild(newLine);
+    }       
 }
