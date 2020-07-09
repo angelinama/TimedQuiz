@@ -3,3 +3,7 @@ As a coding bootcamp student I want to take a timed quiz on JavaScript fundament
 
 ### Deployed page link
  https://angelinama.github.io/timed-quiz/
+
+### TODO
+- add message after select answer
+- get questions from a separate js file

@@ -26,6 +26,7 @@ var inputsEl = document.getElementById("inputs");
 var scoresEl = document.getElementById("scores");
 var clearEl = document.getElementById("clear");
 var curIdx = 0; //currentQuestion index
+var timerInterval; //need a global timer
 
 /* Event listeners */
 //start the quiz: start timer and hide the start button
@@ -59,6 +60,7 @@ function displayQuestion() {
         endQuiz();        
     } else {
         var formEl = document.createElement('form');
+        //TODO...change this and add wrong and correct msg
         inputsEl.innerHTML = "";
         inputsEl.appendChild(formEl);
 
@@ -82,10 +84,9 @@ function displayQuestion() {
                 } else {
                     secondsLeft -= 15;
                     console.log(false);
-                    //TODO...corner case when user deduct too much points before last question
                 }
 
-                // go to next question, here I used recursion, 
+                // go to next question, here I used recursion
                 curIdx += 1;
                 displayQuestion();     
             });
@@ -96,13 +97,12 @@ function displayQuestion() {
 
 // Main timer count down function
 function setTime() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         secondsLeft--;
         timeEl.textContent = "Time: " + secondsLeft;
 
         if(secondsLeft === 0) {
             endQuiz();
-            clearInterval(timerInterval);
         }
 
     }, 1000);
@@ -110,6 +110,9 @@ function setTime() {
 
 //TODO...need one form submit to go to this page
 function endQuiz() {
+    //stop timer
+    clearInterval(timerInterval);
+
     //remove all the quesiton forms
     inputsEl.innerHTML = "";
 
