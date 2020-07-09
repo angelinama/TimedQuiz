@@ -14,7 +14,6 @@ var questions = [
 // import {} from './questions';
 // console.log(questions);
 
-var score = 0; //start score is 0
 var initial = 'defaultUser';
 var secondsLeft = 15 * questions.length; //15 second per question
 var timeEl = document.getElementById("timer");
@@ -25,7 +24,7 @@ var linkBtn = document.getElementById("linkBtn");
 var controlsEL = document.getElementById("controls");
 var inputsEl = document.getElementById("inputs");
 var scoresEl = document.getElementById("scores");
-var formEL = document.getElementById("single");
+// var formEL;
 var clearEl = document.getElementById("clear");
 
 /* Event listeners */
@@ -55,23 +54,54 @@ clearEl.addEventListener('click', () => {
 /* Helper functions*/
 //To display a single question in form
 function displayQuestion() {
-    for (var i = 0; i < questions.length; i++) {
+    for (var i = 0; i < questions.length; i++) { 
+        var formEl = document.createElement('form');
+        inputsEl.removeChild(inputsEl.lastChild);
+        inputsEl.appendChild(formEl);
+
         var q = questions[i];
-        var title = document.createElement('p');
-        title.textContent = q.title;
-        console.log(formEL.lastChild);
-        formEL.removeChild(formEL.lastChild); //TODO... delete after select option
-        formEL.appendChild(title);
+        var title = document.createTextNode(q.title);
+        formEl.appendChild(title);
+        var choices = q.choices;
+        console.log(choices);
+        // var selected = "";
+        for (var j = 0; j < choices.length; j ++) {
+            /* create radio inputs as the following:
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="radios" id="exampleRadios1" value="option1">
+                <label class="form-check-label" for="exampleRadios1">
+                    Default radio
+                </label>
+            </div>
+            */
+            var optionDiv = document.createElement('div');
+            optionDiv.className = 'form-check';
+
+            var optionInput = document.createElement('input');
+            optionInput.className = "form-check-input";
+            optionInput.setAttribute('type', "radio");
+            optionInput.setAttribute('name', "radios");
+            optionInput.id = choices[j];
+            optionInput.setAttribute('value', choices[j]);
+            
+            var optionLabel = document.createElement('label');
+            optionLabel.className = "form-check-label";
+            optionLabel.setAttribute("for", optionInput.id);
+            optionLabel.textContent = optionInput.value;
+            
+            optionDiv.appendChild(optionInput);
+            optionDiv.appendChild(optionLabel);
+            
+            formEl.appendChild(optionDiv);
+
+            optionInput.addEventListener('click', () => {
+                console.log(optionDiv);
+                formEl.removeChild(optionDiv);
+            });
+        }
+            
     }
-    // radios = document.getElementsByName("exampleRadios");
-    //     console.log(radios);
-    //     for (var i = 0; i < radios.length; i++) {
-    //         console.log(radios[i].checked);
-        //     if (radios[i].value === "option1") {
-        //     console.log(radios[i].value);
-        //     break;
-        // }
-    // }
+    
 }
 
 // Main timer count down function
@@ -90,10 +120,8 @@ function setTime() {
 
 //TODO...need one form submit to go to this page
 function endQuiz() {
-    //remove question forms
-    inputsEl.removeChild(formEL);
     //add a text node to dispay user score
-    var textEL = document.createTextNode("Your final score is " + score);
+    var textEL = document.createTextNode("Your final score is " + secondsLeft);
     inputsEl.appendChild(textEL);
     
     //add new form for user initial inputs
@@ -131,7 +159,7 @@ function endQuiz() {
     submitEl.addEventListener('click', () => {
         initial = formInput.value;
         var curUser = {
-            initial:initial, score: score
+            initial:initial, score: secondsLeft
         };
         alert(curUser.initial + "'s score is: " + curUser.score);
         displayScores();
