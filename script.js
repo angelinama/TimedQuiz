@@ -25,6 +25,7 @@ var controlsEL = document.getElementById("controls");
 var inputsEl = document.getElementById("inputs");
 var scoresEl = document.getElementById("scores");
 var clearEl = document.getElementById("clear");
+var curIdx = 0; //currentQuestion index
 
 /* Event listeners */
 //start the quiz: start timer and hide the start button
@@ -52,79 +53,17 @@ clearEl.addEventListener('click', () => {
 });
     
 /* Helper functions*/
-//To display a single question in form
-// function displayQuestion() {
-//     for (var i = 0; i < questions.length; i++) {
-//         var formEl = document.createElement('form');
-//         inputsEl.appendChild(formEl);
-
-//         var q = questions[i];
-//         var title = document.createTextNode(q.title);
-//         formEl.appendChild(title);
-//         var choices = q.choices;
-//         var answer = q.answer;
-        
-//         for (var j = 0; j < choices.length; j ++) {
-//             /* create radio inputs as the following:
-//             <div class="form-check">
-//                 <input class="form-check-input" type="radio" name="radios" id="exampleRadios1" value="option1">
-//                 <label class="form-check-label" for="exampleRadios1">
-//                     Default radio
-//                 </label>
-//             </div>
-//             */
-//             var optionDiv = document.createElement('div');
-//             optionDiv.setAttribute('class','form-check my-1');
-//             optionDiv.style.backgroundColor = "#563d7c";
-//             optionDiv.style.color = 'white';
-
-//             var optionInput = document.createElement('input');
-//             optionInput.className = "form-check-input";
-//             optionInput.setAttribute('type', "radio");
-//             optionInput.setAttribute('name', "radios");
-//             optionInput.id = choices[j];
-//             optionInput.setAttribute('value', choices[j]);
-            
-//             var optionLabel = document.createElement('label');
-//             optionLabel.className = "form-check-label";
-//             optionLabel.setAttribute("for", optionInput.id);
-//             optionLabel.textContent = optionInput.value;
-            
-//             optionDiv.appendChild(optionInput);
-//             optionDiv.appendChild(optionLabel);
-            
-//             formEl.appendChild(optionDiv);          
-//         }
-
-//         var radios = document.getElementsByName('radios');
-//         for(radio in radios) {
-//             radios[radio].onclick = function() {
-//                 var userAns = this.value;
-//                 console.log(title + "\n answer:" + answer);
-//                 console.log("correct answer:" + q.answer);
-//                 if (answer == userAns) {
-//                     alert("correct");
-//                 } else {
-                    
-//                     secondsLeft -= 15;
-//                     //TODO...corner case when user deduct too much points before last question
-//                 }
-                
-//             }
-//         }    
-//     }    
-// }
-
-//To display a single question in form
+//To display a single question in the questions list
 function displayQuestion() {
-    var formEl = document.createElement('form');
-    inputsEl.appendChild(formEl);
-    
-    var i = 0;
-    // while (i < questions.length) {
-        var q = questions[i];
+    if (curIdx == questions.length) {
+        endQuiz();        
+    } else {
+        var formEl = document.createElement('form');
+        inputsEl.innerHTML = "";
+        inputsEl.appendChild(formEl);
+
+        var q = questions[curIdx];
         var title = document.createTextNode(q.title);
-        formEl.innerHTML = '';
         formEl.appendChild(title);
         var choices = q.choices;
         var answer = q.answer;
@@ -146,13 +85,13 @@ function displayQuestion() {
                     //TODO...corner case when user deduct too much points before last question
                 }
 
-                // go to next question
-                i++;
+                // go to next question, here I used recursion, 
+                curIdx += 1;
+                displayQuestion();     
             });
 
         }
-    // }
-        
+    }    
 }
 
 // Main timer count down function
