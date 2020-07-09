@@ -144,7 +144,7 @@ function endQuiz() {
     //add title "all done"
     var headEL = document.createElement('h1');
     headEL.className = 'h1';
-    headEL.textContent = "All Done";
+    headEL.textContent = "All Done!";
     inputsEl.appendChild(headEL);
     //add a text node to dispay user score
     var textEL = document.createTextNode("Your final score is " + secondsLeft);
@@ -213,7 +213,8 @@ function displayScores() {
         var oneUser = curList[i];
         console.log("single user" + oneUser);
         var str = oneUser.initial + ": " + oneUser.score + "\n";
-        var newLine = document.createTextNode(str);
+        var newLine = document.createElement('p');
+        newLine.textContent = str;
         userList.appendChild(newLine);
     }       
 }
