@@ -11,3 +11,5 @@ As a coding bootcamp student, I want to take a timed quiz on JavaScript fundamen
 ### TODO
 - add message after select answer
 - finish README comparing to sample README
+- Create multiple quizzes and an option for users to choose between them.
+- Add audio files to alert the user of correct or incorrect answers. Be sure to include the appropriate license.

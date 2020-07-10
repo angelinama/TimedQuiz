@@ -3,7 +3,6 @@ import { questions } from './questions.js';
 var initial = 'defaultUser';
 var secondsLeft = 15 * questions.length; //15 second per question
 var timeEl = document.getElementById("timer");
-var mainEl = document.getElementById("main");
 var startBtn = document.getElementById("start");
 var resetBtn = document.getElementById("reset");
 var linkBtn = document.getElementById("linkBtn");
@@ -51,17 +50,24 @@ function displayQuestion() {
         inputsEl.appendChild(formEl);
 
         var q = questions[curIdx];
-        var title = document.createTextNode(q.title);
+        var title = document.createElement('p');
+        title.className = 'h5';
+        title.textContent = q.title;
         formEl.appendChild(title);
         var choices = q.choices;
         var answer = q.answer;
+
+        var listEl = document.createElement('div');
+        listEl.className = "list-group";
+        formEl.appendChild(listEl);
         
         for (var j = 0; j < choices.length; j ++) {
             var optionEl = document.createElement('button');
             optionEl.textContent = choices[j];
-            optionEl.setAttribute("class", "btn my-btn");
+            optionEl.setAttribute("class", "my-btn list-group-item list-group-item-action");
             optionEl.setAttribute("type", "button"); 
-            formEl.appendChild(optionEl);
+            // optionEl.style.width = 'auto';
+            listEl.appendChild(optionEl);
             
             //add eventlistener to the button
             optionEl.addEventListener('click', (e) => {
