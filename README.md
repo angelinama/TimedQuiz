@@ -6,7 +6,7 @@ As a coding bootcamp student, I want to take a timed quiz on JavaScript fundamen
  https://angelinama.github.io/timed-quiz/
 
 ### Video Demo link
-[![Watch the video](https://user-images.githubusercontent.com/22566791/87030266-35cb6a00-c196-11ea-9564-e9a01e217204.png)](https://drive.google.com/file/d/10PKL9jp3KFEZCUugA0_5NzH8MxzwyhfN/view)
+[![Watch the video](https://user-images.githubusercontent.com/22566791/87030266-35cb6a00-c196-11ea-9564-e9a01e217204.png)](https://drive.google.com/file/d/1Qoyh688e7olRxvpEXoMMcu8U_sAzSslo/view)
 
 ### TODO
 - finish README comparing to sample README
