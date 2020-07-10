@@ -9,7 +9,6 @@ As a coding bootcamp student, I want to take a timed quiz on JavaScript fundamen
 [![Watch the video](https://user-images.githubusercontent.com/22566791/87030266-35cb6a00-c196-11ea-9564-e9a01e217204.png)](https://drive.google.com/file/d/1XWftLda2NzbO5HSHIsjTqD0lc-74T30F/view)
 
 ### TODO
-- add message after select answer
 - finish README comparing to sample README
+- Sound license
 - Create multiple quizzes and an option for users to choose between them.
-- Add audio files to alert the user of correct or incorrect answers. Be sure to include the appropriate license.

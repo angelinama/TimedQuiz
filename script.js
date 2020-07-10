@@ -66,16 +66,19 @@ function displayQuestion() {
             optionEl.textContent = choices[j];
             optionEl.setAttribute("class", "my-btn list-group-item list-group-item-action");
             optionEl.setAttribute("type", "button"); 
-            // optionEl.style.width = 'auto';
             listEl.appendChild(optionEl);
             
             //add eventlistener to the button
             optionEl.addEventListener('click', (e) => {
                 if (e.target.textContent === answer) {
-                    // console.log(true);
+                    // alert("Correct!");
+                    var correctSound = new Audio("Assets/Sounds/Correct Buzzer Sound FX.mp3");
+                    correctSound.play();
                 } else {
                     secondsLeft -= 15;
-                    // console.log(false);
+                    // alert("Wrong!");
+                    var wrongSound = new Audio("Assets/Sounds/Wrong Buzzer Sound FX.mp3");
+                    wrongSound.play();
                 }
 
                 // go to next question, here I used recursion
@@ -100,7 +103,7 @@ function setTime() {
     }, 1000);
 }
 
-//TODO...need one form submit to go to this page
+//Quiz ending page: clear count done and add new form to get initial inputs
 function endQuiz() {
     //stop timer
     clearInterval(timerInterval);
