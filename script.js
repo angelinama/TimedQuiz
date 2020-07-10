@@ -1,7 +1,8 @@
-import { questions } from './questions.js';
+import { jsQuestions, cssQuestions } from './questions.js';
 
+var questions = []; //quiz question and time will be set after click start
 var initial = 'defaultUser';
-var secondsLeft = 15 * questions.length; //15 second per question
+var secondsLeft = 0;
 var timeEl = document.getElementById("timer");
 var startBtn = document.getElementById("start");
 var resetBtn = document.getElementById("reset");
@@ -17,6 +18,13 @@ var timerInterval; //need a global timer
 //start the quiz: start timer and hide the start button
 startBtn.addEventListener('click', () => {
     controlsEL.style.display = "None";
+    var quizName = document.getElementById('quizName');
+if (quizName.value === "Javascript") {
+    questions = jsQuestions;
+} else if (quizName.value === 'CSS') {
+    questions = cssQuestions;
+}   
+    secondsLeft = 15 * questions.length; //15 second per question
     displayQuestion();      
     setTime();
 });  

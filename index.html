@@ -25,9 +25,19 @@
       <div class="container p-5 my-5 text-center">
         <div id="controls">
           <h1>Coding Quiz Chanllenge</h1>
-          <button class="btn my-btn" aria-label="start quiz" id="start">
-            Start Quiz
-          </button>
+          <p>Select the quiz from dropdown and hit "Start Quiz" button to start</p>
+          <form>
+            <div class="form-group">
+              <label for="quizName">Select the quiz</label>
+              <select class="form-control" id="quizName">
+                <option>Javascript</option>
+                <option>CSS</option>
+              </select>
+            </div>
+            <button class="btn my-btn" aria-label="start quiz" id="start" type="button">
+              Start Quiz
+            </button>
+          </form>
         </div>
         <div id="inputs"></div>
         <div id="message" style="display: none;">

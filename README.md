@@ -11,4 +11,3 @@ As a coding bootcamp student, I want to take a timed quiz on JavaScript fundamen
 ### TODO
 - finish README comparing to sample README
 - Sound license
-- Create multiple quizzes and an option for users to choose between them.
