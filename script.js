@@ -41,12 +41,19 @@ clearEl.addEventListener('click', () => {
 /* Helper functions*/
 //To display a single question in the questions list
 function displayQuestion() {
+    var msgDiv = document.getElementById("message");
+    if (msgDiv.style.display !== 'none') {
+        //wait time to make sure user can see "Correct!" / "Wrong!" msg from last question
+        setTimeout(function(){ msgDiv.style.display = 'none'; }, 500);
+    }
     if (curIdx == questions.length) {
         endQuiz();        
     } else {
         var formEl = document.createElement('form');
-        //TODO...change this and add wrong and correct msg
-        inputsEl.innerHTML = "";
+        //clear former question and add new question form
+        if (inputsEl.lastChild) {
+            inputsEl.removeChild(inputsEl.lastChild);
+        }
         inputsEl.appendChild(formEl);
 
         var q = questions[curIdx];
@@ -70,13 +77,16 @@ function displayQuestion() {
             
             //add eventlistener to the button
             optionEl.addEventListener('click', (e) => {
+                var msgDiv = document.getElementById("message");
+                msgDiv.style.display = 'block';
+                var msgText = document.getElementById("result");
                 if (e.target.textContent === answer) {
-                    // alert("Correct!");
+                    msgText.textContent ="Correct!";
                     var correctSound = new Audio("Assets/Sounds/Correct Buzzer Sound FX.mp3");
                     correctSound.play();
                 } else {
                     secondsLeft -= 15;
-                    // alert("Wrong!");
+                    msgText.textContent ="Wrong!";
                     var wrongSound = new Audio("Assets/Sounds/Wrong Buzzer Sound FX.mp3");
                     wrongSound.play();
                 }
