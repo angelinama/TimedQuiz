@@ -10,5 +10,4 @@ As a coding bootcamp student, I want to take a timed quiz on JavaScript fundamen
 
 ### TODO
 - add message after select answer
-- get questions from a separate js file
 - finish README comparing to sample README

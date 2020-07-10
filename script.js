@@ -1,18 +1,4 @@
-//TODO... remove this and put in questions.js
-var questions = [
-    {
-      title: 'Commonly used data types DO NOT include:',
-      choices: ['strings', 'booleans', 'alerts', 'numbers'],
-      answer: 'alerts'
-    },
-    {
-      title: 'The condition in an if / else statement is enclosed within ____.',
-      choices: ['quotes', 'curly brackets', 'parentheses', 'square brackets'],
-      answer: 'parentheses'
-    }
-  ];
-// import {} from './questions';
-// console.log(questions);
+import { questions } from './questions.js';
 
 var initial = 'defaultUser';
 var secondsLeft = 15 * questions.length; //15 second per question
@@ -80,10 +66,10 @@ function displayQuestion() {
             //add eventlistener to the button
             optionEl.addEventListener('click', (e) => {
                 if (e.target.textContent === answer) {
-                    console.log(true);
+                    // console.log(true);
                 } else {
                     secondsLeft -= 15;
-                    console.log(false);
+                    // console.log(false);
                 }
 
                 // go to next question, here I used recursion
@@ -186,7 +172,6 @@ function displayScores() {
         }
     for (var i = 0; i < curList.length; i++) {
         var oneUser = curList[i];
-        console.log("single user" + oneUser);
         var str = oneUser.initial + ": " + oneUser.score + "\n";
         var newLine = document.createElement('p');
         newLine.textContent = str;
